@@ -26,6 +26,11 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>cloud.piranha.maven.plugins</groupId>
+                <artifactId>piranha-micro-maven-plugin</artifactId>
+                <version>20.4.0</version>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
