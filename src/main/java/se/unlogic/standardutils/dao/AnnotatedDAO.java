@@ -61,7 +61,7 @@ public class AnnotatedDAO<T> {
 	protected final Class<T> beanClass;
 
 	protected final List<QueryParameterPopulator<?>> queryParameterPopulators;
-	protected final List<BeanStringPopulator<?>> beanStringPopulators;
+	protected List<BeanStringPopulator<?>> beanStringPopulators;
 
 	protected final ArrayList<Column<T, ?>> simpleKeys = new ArrayList<Column<T, ?>>();
 	protected final ArrayList<Column<T, ?>> simpleColumns = new ArrayList<Column<T, ?>>();
