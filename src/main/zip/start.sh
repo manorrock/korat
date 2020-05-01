@@ -1,2 +1,6 @@
 #!/bin/bash
-java -cp lib/*: se.unlogic.eagledns.EagleDNS
+for i in `ls ./lib/*.jar`
+do
+  CLASSPATH=$CLASSPATH:$i
+done
+exec java -cp $CLASSPATH se.unlogic.eagledns.EagleDNS
