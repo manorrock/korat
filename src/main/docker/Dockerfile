@@ -9,7 +9,7 @@ FROM debian
 #
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl gnupg2 gzip software-properties-common tar && \
+    apt-get install -y curl dnsutils gnupg2 gzip software-properties-common tar && \
     rm -rf /var/lib/apt/lists/*
 
 #

@@ -4,7 +4,7 @@ RUN ["cross-build-start"]
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl gzip libfontconfig1 libfreetype6 tar && \
+    apt-get install -y curl dnsutils gzip libfontconfig1 libfreetype6 tar && \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/local && \
