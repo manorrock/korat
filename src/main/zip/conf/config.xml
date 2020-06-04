@@ -50,16 +50,16 @@
 		
 		<!-- Uncomment the block below to enable a forwarding resolver without failover enabled -->
 		
-		<!--
+		
 		<Resolver>
 			<Name>Forwarder (without failover)</Name>
 			<Class>se.unlogic.eagledns.resolvers.ForwardingResolver</Class>
 			<Properties>
-				<Property name="server">192.168.1.1</Property>
+				<Property name="server">192.168.15.1</Property>
 				<Property name="timeout">1</Property>
 			</Properties>			
 		</Resolver>	
-		-->				
+						
 		
 		<!-- Uncomment the block below to enable a forwarding resolver with failover enabled -->
 		
@@ -79,19 +79,6 @@
 	</Resolvers>
 	
 	<Plugins>
-		<!-- RMI based remote management plugin needed for the info, reload and stop scripts to work -->
-		<Plugin>
-			<Name>RMI remote management</Name>
-			<Class>se.unlogic.eagledns.plugins.remotemanagement.RMIRemoteManagementPlugin</Class>
-			<Properties>
-				<Property name="password">secret</Property>
-				<Property name="port">5353</Property>
-				
-				<!-- Sets the java.rmi.server.hostname used for RMI clients -->
-				<Property name="rmiServerHostname">localhost</Property>
-			</Properties>
-		</Plugin>
-		
 		<!-- This is a new plugin that keeps track of the number of queries handled -->
 		<Plugin>
 			<Name>Query statistics</Name>
@@ -103,44 +90,6 @@
 				<!-- This property controls where the statistics file is written -->
 				<Property name="filePath">logs/querystats.xml</Property>
 			</Properties>
-		</Plugin>
-		
-		<!-- RMI based zone replication plugin (server) -->
-		<!-- 	
-		<Plugin>
-			<Name>RMI zone replication server</Name>
-			<Class>se.unlogic.eagledns.plugins.zonereplicator.ReplicationServerPlugin</Class>
-			<Properties>
-				<Property name="rmiServerHostname">localhost</Property>
-				<Property name="rmiPassword">secret</Property>
-				<Property name="rmiPort">5000</Property>
-				
-				<Property name="driver">com.mysql.jdbc.Driver</Property>
-				<Property name="username">root</Property>
-				<Property name="password">root</Property>
-				<Property name="url">jdbc:mysql://localhost:3306/eagledns</Property>				
-			</Properties>
-		</Plugin>
-		-->
-		
-		<!-- RMI based zone replication plugin (client) -->
-		<!--
-		<Plugin>
-			<Name>RMI zone replication server</Name>
-			<Class>se.unlogic.eagledns.plugins.zonereplicator.ReplicationClientPlugin</Class>
-			<Properties>
-				<Property name="serverAddress">localhost</Property>
-				<Property name="rmiPassword">secret</Property>
-				<Property name="rmiPort">5000</Property>
-				
-				<Property name="replicationInterval">60</Property>
-				
-				<Property name="driver">com.mysql.jdbc.Driver</Property>
-				<Property name="username">root</Property>
-				<Property name="password">root</Property>
-				<Property name="url">jdbc:mysql://localhost:3306/eagledns</Property>					
-			</Properties>
-		</Plugin>
-		-->			
+		</Plugin>		
 	</Plugins>			
 </Config>
