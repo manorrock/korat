@@ -7,7 +7,6 @@
  ******************************************************************************/
 package se.unlogic.eagledns;
 
-import se.unlogic.eagledns.plugins.remotemanagement.EagleManager;
 import se.unlogic.eagledns.zoneproviders.ZoneProvider;
 
 /**
