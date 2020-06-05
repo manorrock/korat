@@ -61,20 +61,5 @@
 			</Properties>			
 		</Resolver>
 		-->
-	</Resolvers>
-	
-	<Plugins>
-		<!-- This is a new plugin that keeps track of the number of queries handled -->
-		<Plugin>
-			<Name>Query statistics</Name>
-			<Class>se.unlogic.eagledns.plugins.QueryStatsPlugin</Class>
-			<Properties>
-				<!-- This property controls how often statistics should be saved to file (in seconds) -->
-				<Property name="savingInterval">60</Property>
-				
-				<!-- This property controls where the statistics file is written -->
-				<Property name="filePath">logs/querystats.xml</Property>
-			</Properties>
-		</Plugin>		
-	</Plugins>			
+	</Resolvers>			
 </Config>
