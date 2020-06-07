@@ -21,9 +21,20 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
-        docker build -f src/main/docker/Dockerfile -t manorrock/korat:snapshot .
-        docker push manorrock/korat:snapshot
-    - name: Build ARM32v6 image
+        docker build -f src/main/docker/Dockerfile.amd64 -t manorrock/korat:amd64-snapshot .
+        docker push manorrock/korat:amd64-snapshot
+    - name: Build arm image
       run: |
-        docker build -f src/main/docker/Dockerfile.ARM32v6 -t manorrock/korat:arm32v6-snapshot .
-        docker push manorrock/korat:arm32v6-snapshot
+        docker build -f src/main/docker/Dockerfile.arm -t manorrock/korat:arm-snapshot .
+        docker push manorrock/korat:arm-snapshot
+    - name: Push manifest
+      run: |
+        export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker manifest create manorrock/korat:snapshot \
+          manorrock/korat:amd64-snapshot \
+          manorrock/korat:arm-snapshot
+        docker manifest annotate manorrock/korat:snapshot \
+          manorrock/korat:amd64-snapshot --os linux --arch amd64
+        docker manifest annotate manorrock/korat:snapshot \
+          manorrock/korat:arm-snapshot --os linux --arch arm
+        docker manifest push manorrock/korat:snapshot
