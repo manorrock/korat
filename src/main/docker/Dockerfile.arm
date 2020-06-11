@@ -1,35 +1,52 @@
+#
+# Use Debian
+#
 FROM balenalib/raspberry-pi
 
+#
+# Setup for cross-platform building.
+#
 RUN ["cross-build-start"]
 
+#
+# Update Debian and install curl, gnupg2, gzip, software-properties-common and 
+# tar.
+#
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl dnsutils gzip libfontconfig1 libfreetype6 tar && \
+    apt-get install -y curl dnsutils gnupg2 gzip software-properties-common tar && \
     rm -rf /var/lib/apt/lists/*
 
+#
+# Install Zulu 11.
+#
 RUN cd /usr/local && \
-    curl --insecure -L -O https://cdn.azul.com/zulu-embedded/bin/zulu8.46.0.225-ca-jdk8.0.252-linux_aarch32hf.tar.gz && \
-    tar xfvz zulu8.46.0.225-ca-jdk8.0.252-linux_aarch32hf.tar.gz && \
-    mv zulu8.46.0.225-ca-jdk8.0.252-linux_aarch32hf jdk && \
-    rm zulu8.46.0.225-ca-jdk8.0.252-linux_aarch32hf.tar.gz
+    curl --insecure -L -O https://cdn.azul.com/zulu-embedded/bin/zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz && \
+    tar xfvz zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz && \
+    mv zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf jdk && \
+    rm zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz
 
-ENV JAVA_HOME=/usr/local/jdk
+#
+# Setup PATH
+#
 ENV PATH=$PATH:/usr/local/jdk/bin
 
-# ENV PIRANHA_VERSION=20.4.0
 #
-# curl --insecure -L -O https://repo1.maven.org/maven2/cloud/piranha/piranha-micro/${PIRANHA_VERSION}/piranha-micro-${PIRANHA_VERSION}-all.jar && \
-# mkdir -p /usr/local/piranha && \
-# mv piranha-micro-${PIRANHA_VERSION}-all.jar /usr/local/piranha/piranha-micro.jar
-#    
-# WORKDIR /usr/local/piranha
-# CMD ["java", "-jar", "piranha-micro.jar", "--war", "ROOT.war"]
-# COPY target/korat.war /usr/local/piranha/ROOT.war
-
+# Add the Manorrock Korat distribution.
+#
 ADD target/korat.tar.gz /usr/local
 
+#
+# Set the WORKDIR
+#
 WORKDIR /usr/local/korat
 
+#
+# End cross platform building.
+#
 RUN ["cross-build-end"]
 
+#
+# Start Manorrock Korat
+#
 CMD sh ./start.sh
