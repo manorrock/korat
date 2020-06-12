@@ -16,3 +16,10 @@ The zone files are formatted compliant to the following:
 
 1. [RFC 1035](http://tools.ietf.org/html/rfc1035) 
 1. [RFC 1034](http://tools.ietf.org/html/rfc1034)
+
+## Important notice
+
+Note if you file issues or answer questions on the issue tracker and/or issue 
+pull requests you agree that those contributions will be owned by Manorrock.com
+and that Manorrock.com can use those contributions in any manner Manorrock.com
+so desires.
