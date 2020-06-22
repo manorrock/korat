@@ -36,6 +36,9 @@ jobs:
         docker push manorrock/korat:arm-$VERSION
     - name: Push manifest
       run: |
+        TAG=${GITHUB_REF}
+        INDEX=${TAG%v*}
+        VERSION=${TAG:${#INDEX}}
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/korat:$VERSION \
           manorrock/korat:amd64-$VERSION \
