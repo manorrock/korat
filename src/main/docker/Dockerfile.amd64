@@ -1,30 +1,12 @@
 #
-# Use Debian
+# Use Manorrock Server
 #
-FROM debian
+FROM manorrock/server:amd64-v20.6.0
 
 #
-# Update Debian and install curl, gnupg2, gzip, software-properties-common and 
-# tar.
+# Copy Manorrock Korat into Tomcat 9.
 #
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl dnsutils gnupg2 gzip software-properties-common tar && \
-    rm -rf /var/lib/apt/lists/*
-
-#
-# Install AdoptOpenJDK 11.
-#
-RUN cd /usr/local && \
-    curl --insecure -L -O https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz && \
-    tar xfvz OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz && \
-    mv jdk-11.0.7+10 jdk && \
-    rm OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz
-
-#
-# Setup PATH
-#
-ENV PATH=$PATH:/usr/local/jdk/bin
+COPY target/korat.war /usr/local/tomcat/webapps/ROOT.war
 
 #
 # Add the Manorrock Korat distribution.
@@ -32,11 +14,11 @@ ENV PATH=$PATH:/usr/local/jdk/bin
 ADD target/korat.tar.gz /usr/local
 
 #
-# Set the WORKDIR
+# Set the work directory
 #
 WORKDIR /usr/local/korat
 
 #
-# Start Manorrock Korat
+# Setup command to start Tomcat with console output.
 #
-CMD sh ./start.sh
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]

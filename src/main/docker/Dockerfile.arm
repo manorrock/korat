@@ -1,7 +1,7 @@
 #
-# Use Debian
+# Use Manorrock Server
 #
-FROM balenalib/raspberry-pi
+FROM manorrock/server:arm-v20.6.0
 
 #
 # Setup for cross-platform building.
@@ -9,27 +9,9 @@ FROM balenalib/raspberry-pi
 RUN ["cross-build-start"]
 
 #
-# Update Debian and install curl, gnupg2, gzip, software-properties-common and 
-# tar.
+# Copy Manorrock Korat into Tomcat 9.
 #
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl dnsutils gnupg2 gzip software-properties-common tar && \
-    rm -rf /var/lib/apt/lists/*
-
-#
-# Install Zulu 11.
-#
-RUN cd /usr/local && \
-    curl --insecure -L -O https://cdn.azul.com/zulu-embedded/bin/zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz && \
-    tar xfvz zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz && \
-    mv zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf jdk && \
-    rm zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz
-
-#
-# Setup PATH
-#
-ENV PATH=$PATH:/usr/local/jdk/bin
+COPY target/korat.war /usr/local/tomcat/webapps/ROOT.war
 
 #
 # Add the Manorrock Korat distribution.
@@ -37,7 +19,7 @@ ENV PATH=$PATH:/usr/local/jdk/bin
 ADD target/korat.tar.gz /usr/local
 
 #
-# Set the WORKDIR
+# Set the work directory
 #
 WORKDIR /usr/local/korat
 
@@ -47,6 +29,6 @@ WORKDIR /usr/local/korat
 RUN ["cross-build-end"]
 
 #
-# Start Manorrock Korat
+# Setup command to start Tomcat with console output.
 #
-CMD sh ./start.sh
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
