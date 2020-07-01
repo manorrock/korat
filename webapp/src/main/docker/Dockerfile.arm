@@ -16,12 +16,12 @@ COPY target/korat.war /usr/local/tomcat/webapps/ROOT.war
 #
 # Add the Manorrock Korat distribution.
 #
-ADD target/korat.tar.gz /usr/local
+ADD target/korat.tar.gz /root/.manorrock
 
 #
 # Set the work directory
 #
-WORKDIR /usr/local/korat
+WORKDIR /root/.manorrock/korat
 
 #
 # End cross platform building.
