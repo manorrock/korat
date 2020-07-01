@@ -50,22 +50,19 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>dnsjava</groupId>
-            <artifactId>dnsjava</artifactId>
-            <version>2.1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.6</version>
-        </dependency>
-        <!-- Servlet API -->
+        <!-- Jakarta Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>4.0.3</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- Korat Shared -->
+        <dependency>
+            <groupId>com.manorrock.korat</groupId>
+            <artifactId>korat-shared</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <properties>

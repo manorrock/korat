@@ -17,5 +17,7 @@
     </organization>
     <modules>
         <module>webapp</module>
+        <module>standalone</module>
+        <module>shared</module>
     </modules>
 </project>
