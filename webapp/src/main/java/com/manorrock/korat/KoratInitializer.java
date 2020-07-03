@@ -32,21 +32,33 @@ import javax.servlet.ServletException;
 import se.unlogic.eagledns.EagleDNS;
 
 /**
- * The ServletContainerInitializer that is used to bootstrap the DNS server side.
- * 
+ * The ServletContainerInitializer that is used to bootstrap the DNS server
+ * side.
+ *
  * @author Manfred Riem (mriem@manorrock.com)
  */
 public class KoratInitializer implements ServletContainerInitializer {
 
     /**
      * On startup of the web application.
-     * 
+     *
      * @param classes the set of annotated classes.
      * @param servletContext the Servlet context.
-     * @throws ServletException when a serious error occurs. 
+     * @throws ServletException when a serious error occurs.
      */
     @Override
     public void onStartup(Set<Class<?>> classes, ServletContext servletContext) throws ServletException {
-        EagleDNS.main(new String[] {});
+        String home = null;
+        if (System.getenv("KORAT_HOME") != null) {
+            home = System.getenv("KORAT_HOME");
+        }
+        if (home == null) {
+            home = System.getProperty("KORAT_HOME");
+        }
+        if (home != null) {
+            EagleDNS.main(new String[]{home + "/conf/config.xml"});
+        } else {
+            EagleDNS.main(new String[]{});
+        }
     }
 }

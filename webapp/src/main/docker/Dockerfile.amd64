@@ -14,7 +14,12 @@ COPY target/korat.war /usr/local/tomcat/webapps/ROOT.war
 ADD target/korat.tar.gz /root/.manorrock
 
 #
-# Set the work directory
+# Set the KORAT_HOME.
+#
+ENV KORAT_HOME=/root/.manorrock/korat
+
+#
+# # Set the work directory.
 #
 WORKDIR /root/.manorrock/korat
 

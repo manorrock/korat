@@ -7,6 +7,7 @@
  ******************************************************************************/
 package se.unlogic.eagledns;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -140,7 +141,8 @@ public class EagleDNS implements Runnable, SystemInterface {
 		
 		this.startTime = System.currentTimeMillis();
 		
-		DOMConfigurator.configure("conf/log4j.xml");
+                File file = new File(configFilePath);
+		DOMConfigurator.configure(file.getParent() + "/log4j.xml");
 
 		System.out.println(VERSION + " starting...");
 		log.fatal(VERSION + " starting...");
