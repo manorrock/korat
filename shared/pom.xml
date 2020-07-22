@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.manorrock.korat</groupId>
         <artifactId>project</artifactId>
-        <version>20.6.0-SNAPSHOT</version>
+        <version>20.8.0-SNAPSHOT</version>
     </parent>
     <artifactId>korat-shared</artifactId>
     <packaging>jar</packaging>
