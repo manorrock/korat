@@ -21,17 +21,14 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
-        cd webapp
         docker build -f src/main/docker/Dockerfile.amd64 -t manorrock/korat:amd64-snapshot .
         docker push manorrock/korat:amd64-snapshot
     - name: Build arm image
       run: |
-        cd webapp
         docker build -f src/main/docker/Dockerfile.arm -t manorrock/korat:arm-snapshot .
         docker push manorrock/korat:arm-snapshot
     - name: Push manifest
       run: |
-        cd webapp
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/korat:snapshot \
           manorrock/korat:amd64-snapshot \
