@@ -22,7 +22,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}}
@@ -30,7 +29,6 @@ jobs:
         docker push manorrock/korat:amd64-$VERSION
     - name: Build arm image
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}}
@@ -38,7 +36,6 @@ jobs:
         docker push manorrock/korat:arm-$VERSION
     - name: Push manifest
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
         VERSION=${TAG:${#INDEX}}
