@@ -1,0 +1,5 @@
+FROM debian
+RUN apt-get -y update && \
+    apt-get -y install bind9 && \
+    rm -rf /var/lib/apt/lists/*
+CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf"]
