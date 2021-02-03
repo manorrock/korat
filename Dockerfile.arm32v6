@@ -1,0 +1,7 @@
+FROM balenalib/raspberry-pi
+RUN ["cross-build-start"]
+RUN apt-get -y update && \
+    apt-get -y install bind9 && \
+    rm -rf /var/lib/apt/lists/*
+RUN ["cross-build-end"]
+CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf"]
