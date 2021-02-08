@@ -1,7 +1,13 @@
 FROM balenalib/raspberry-pi
 RUN ["cross-build-start"]
 RUN apt-get -y update && \
-    apt-get -y install bind9 && \
+    apt-get -y install bind9 curl fontconfig fonts-dejavu && \
     rm -rf /var/lib/apt/lists/*
+RUN cd /usr/local && \
+    curl --insecure -L -O https://cdn.azul.com/zulu-embedded/bin/zulu11.39.61-ca-jdk11.0.7-linux_aarch32hf.tar.gz && \
+    tar xfvz zulu11.39.61-ca-jdk11.0.7-linux_aarch32hf.tar.gz && \
+    mv zulu11.39.61-ca-jdk11.0.7-linux_aarch32hf jdk && \
+    rm zulu11.39.61-ca-jdk11.0.7-linux_aarch32hf.tar.gz
+ENV PATH=$PATH:/usr/local/jdk/bin
 RUN ["cross-build-end"]
 CMD ["/usr/sbin/named", "-g", "-c", "/etc/bind/named.conf"]
