@@ -1,3 +1,4 @@
 context.xml
 nb-configuration.xml
 target/
+!/src/main/webapp/META-INF/context.xml
