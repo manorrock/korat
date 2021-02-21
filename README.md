@@ -1,6 +1,6 @@
 # Manorrock Korat
 
-This project delivers a Java based DNS server.
+This project delivers a DNS server.
 
 ## Deploy the server using Docker
 
@@ -8,14 +8,7 @@ This project delivers a Java based DNS server.
   docker run --privileged --rm -d -p 8080:8080 -p 53:53/tcp -p 53:53/udp manorrock/korat:VERSION
 ```
 
-And replace VERSION with the version you want to use.
-
-## Zone file format
-
-The zone files are formatted compliant to the following:
-
-1. [RFC 1035](http://tools.ietf.org/html/rfc1035) 
-1. [RFC 1034](http://tools.ietf.org/html/rfc1034)
+And replace VERSION with the version you want to use.\
 
 ## Important notice
 
