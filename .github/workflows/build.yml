@@ -19,11 +19,11 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
-        docker build -f src/main/docker/Dockerfile.amd64 -t manorrock/korat:amd64-snapshot .
+        docker build -f Dockerfile.amd64 -t manorrock/korat:amd64-snapshot .
         docker push manorrock/korat:amd64-snapshot
     - name: Build arm32v6 image
       run: |
-        docker build -f src/main/docker/Dockerfile.arm32v6 -t manorrock/korat:arm32v6-snapshot .
+        docker build -f Dockerfile.arm32v6 -t manorrock/korat:arm32v6-snapshot .
         docker push manorrock/korat:arm32v6-snapshot
     - name: Push manifest
       run: |
